@@ -1,0 +1,190 @@
+This is the main index for the comp.compilers server.  It lists the
+various files available from the server.  Everything available from the
+mail server is also available from the FTP archive at primost.cs.wisc.edu.
+Please use the FTP archive if you can, to avoid overloading the single
+modem that connects the mail server to the outside world.
+
+All of the back messages from comp.compilers are available.  The
+comp.compilers message index is in a separate file for each year with
+the names index86, index87, etc.  You can get the files via, e.g.:
+
+	send index90
+
+Each message has an ID number of the form YY-MM-NNN where YY and MM are
+the year and month and NNN is the message number within the month.  Some
+message numbers may appear more than once if the message is a digest, a
+few messages were cancelled and do not appear at all.  The index is
+updated daily.  This is the file "index", listing other available files.
+
+The message index files contain all of the Subject: lines (with "Re:"
+edited out) and the message ID and number of lines in lines of the
+message.
+
+You can retrieve messages by message ID.  For example, to get the third
+message from January 1991, send a message containing this line:
+
+	send 91-01-003
+
+
+There are some other files available as well:
+
+	 1919 Sep 22 22:37 help
+
+The help message.
+
+	14463 Sep 22 12:56 FAQ
+	14463 Sep 22 12:56 faq
+	14463 Sep 22 12:56 monthly
+
+Three names for the same file: the comp.compilers monthly posting,
+which also contains the FAQ, same as is posted on the first of each month.  
+
+	51617 Mar 27 15:07 free1
+	53965 Mar 27 15:09 free2
+	51775 Mar 28 11:00 free3
+
+The free compiler tools list, posted monthly to comp.compilers.
+
+	 3695 Jul 27 21:39 bookblurb
+
+A description of the printed 1990 comp.compilers book, also posted on
+the first of each month.
+
+	30146 Oct  7 23:22 c++g.01
+	30406 Oct  7 23:22 c++g.02
+	30120 Oct  7 23:22 c++g.03
+	30127 Oct  7 23:22 c++g.04
+	28648 Oct  7 23:22 c++g.05
+
+
+Jim Roskind's C and C++ parsers, version 5, as five unencoded compressed
+shar files.  You need all five parts.  Does not include the y.output file
+nor the discussion of his yacc autodocumenter because they're too big and
+not essential for the grammar.
+
+	21893 Apr 11 11:34 c++kit
+
+A kit of C++ code useful in building parsers.  Compressed uuencoded shar.
+
+	14716 Nov 13  1989 c-grammar
+
+A reasonably good ANSI C yacc parser.  Plain shar archive.  Another yacc C
+parser is in 91-09-030.
+
+	33439 Mar 24  1990 ftn-grammar
+
+A yacc parser for a small subset of F77 that I wrote.  Plain shar archive.
+
+	14519 Feb 27 23:23 modula2
+
+A yacc and lex parser for Modula 2.  Plain shar archive.
+
+	17936 Mar 28  1990 pascal-grammar
+
+A yacc and lex parser for Pascal.  Plain shar archive.
+
+	31424 Oct 11 15:46 adagrammar
+
+A yacc and lex parser for Ada.  Plain shar archive.
+
+	31728 Dec 14  1990 perfecthash
+
+A program that looks for perfect hash functions.  Plain shar archive.
+See messages 89-01-003, 89-01-004, and 89-01-005.
+
+	  765 Sep 26 16:48 keywords
+
+The keywords used on comp.compilers Keywords: header lines
+
+	12361 Nov  6 16:25 yyref.shar
+
+A cross-referencer for yacc files.  Adequate, but could be a little
+smarter.  Plain shar archive.
+
+        61219 Mar  8 22:13 strand88.tech
+	 5655 May  7 13:26 strand88-12
+
+Two papers on the Strand88 parallel programming language.
+
+	46481 Apr 16 18:26 sql.shar
+
+Leroy Cain's free parser for the ANSI SQL data base language.
+
+	15063 Oct 30 23:03 ora-sql.shar
+
+The SQL parser from O'Reilly's "lex&yacc," 2nd edition
+
+	 7307 May 24 23:49 toplas80
+	 5946 May 24 23:50 toplas81
+	 8079 May 24 23:50 toplas82
+	 6852 May 24 23:52 toplas83
+	 7332 May 24 23:52 toplas84
+	 6757 May 24 23:53 toplas85
+	 5285 May 24 23:53 toplas86
+	 6014 May 24 23:53 toplas87
+	 6794 May 24 23:53 toplas88
+	 6512 May 24 23:54 toplas89
+	 5828 May 24 23:54 toplas90
+	 6238 May 24 23:54 toplas91
+	 2351 May 24 23:54 toplas92
+
+Annual contents for ACM Transaction on Programming Languages and Systems.
+
+	35537 May 30 14:36 toplas-refer.1
+	29231 May 30 14:36 toplas-refer.2
+
+TOPLAS contents in refer format.  Part 1 is 1979-1985, part 2 is 1986-1992
+
+	21295 Jun  2 23:20 lins-1
+
+Chuck Lins' compiler bibliography, in a Macintosh format more or less
+similar to BIBTEX.
+Reference macro definitions and Books and Register Allocation
+
+	35114 Jun  2 23:21 lins-2
+
+Optimization, first part
+
+	36220 Jun  2 23:21 lins-3
+
+Optimization, second part
+
+	31880 Jun  2 23:21 lins-4
+
+Interprocedural Optimization, Caches, Parsing, Hashing, Compiler
+Generators and Front-Ends, Object-Oriented
+
+	30134 Jun  2 23:21 lins-5
+
+Graphs, Data Structures, Parallel Programming, Miscellaneous, Oberon,
+
+	24685 Jun 10 13:57 iwcg91.bib
+
+BIBTEX papers from Proceedings of the International Workshop on
+Code Generation, Dagstuhl, Germany, 20-24 May 1991
+
+	12111 Jul 29 16:08 lfp92-bib
+
+BIBTEX papers from the Conference Record of the 1992 ACM Symposium on
+Lisp and Functional Programming
+
+	59767 Aug 22 01:09 floatbib
+
+Norbert Juffa's bibliography on floating point arithmetic
+
+	71957 Mar 29 11:23 mueller.ps
+
+A review paper by Frank Mueller of Florida State University on register
+allocation by graph coloring, revised 3/26/93.  Uuencoded compressed
+postscript file.
+
+	19225 Mar 30 09:48 cgram-ll1
+
+An LL(1) grammar for C by Mohd Hanafiah Abdullah, written in Scheme,
+along with code to compute first and follow sets.
+
+	54236 May  6 12:16 trans-bib
+
+A bibliography on transformations systems compiled by Rene Dekker,
+dekker@dutiag.twi.tudelft.nl.  Compressed shar of text file.
+

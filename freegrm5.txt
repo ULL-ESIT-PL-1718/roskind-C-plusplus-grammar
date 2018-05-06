@@ -1,0 +1,413 @@
+FILENAME: FREEGRAM5.TXT
+AUTHOR: Jim Roskind
+        Independent Consultant
+        516 Latania Palm Drive
+        Indialantic FL 32903
+        (407)729-4348
+        jar@hq.ileaf.com
+        or ...uunet!leafusa!jar
+
+                                                        7/4/91
+
+Dear C++ and C Grammar User,
+
+I have written a YACC debugging tool, and a set of grammars for C  and 
+C++ in order to use them within my own personal project development. I 
+have  made  the  results  of  my  work in this area available to other 
+developers at no charge with the hope that they would use my work.   I 
+believe   the   entire   C++   community   can   benefit   from   such 
+standardization.  If any of the  copyright  notices  on  the  grammars 
+(which  are  VERY  liberal) prevent using my work, please notify me of 
+the problem.
+
+Note that the grammars can each be processed by  YACC,  but  they  are 
+very clean, and make NO USE of the precedence setting (i.e.: %prec) or 
+associativity  setting (i.e.:%assoc) constructs of YACC.  This feature 
+should make them easily  portable  to  other  parser  generator  input 
+format.   This "cleanliness" fact also provides brutal exposure of all 
+the complex constructs in C++, and the complexity of the grammar as  a 
+whole  (the  C++  grammar  is  2 to 3 times as large as the C grammar) 
+reflects this exposure.
+
+The files included in this set are:
+
+    FREEGRM5.TXT    This introductory file
+    GRAMMAR5.TXT    Parsing ambiguities in C++, and in my grammar
+    CPP5.Y          My YACC compatible C++ grammar
+    C5.Y            My YACC compatible, ANSI C conformant grammar
+    CPP5.L          Flex input file defining a C++ lexical analyzer
+    SKELGRPH.C      A hacked file from the Berkeley YACC distribution
+    AUTODOC5.TXT    Documentation for my machine generated analysis
+    Y.OUTPUT        Machine generated analysis of the C++ grammar.
+
+Aside from the addition of several files, this release of  my  grammar 
+corrects  a  few  problems  located  in my prior release.  I have also 
+transitioned to using names in my grammar that are more acceptable  to 
+a  wider  variety  of  parser  generators.  This release also includes 
+support for nested types (at  least  grammatically,  as  there  is  no 
+symbol  table  provided).  It does not support templates and exception 
+handling, as the ANSI C++ Committee  is  still  discussing  variations 
+(and  trying  to  deal  with a variety of ambiguities that the initial 
+proposals, such as what is described in the ARM, would entail).
+
+Since my first public release of my grammar, I have received a  number 
+of  requests.   One  of  the  most  common  requests was for a lexical 
+analyzer to  go  with  the  grammar.   This  release  of  the  grammar 
+continues  to  provides  such  a a "bare bones" lexical analyzer.  The 
+analyzer does not support preprocessing, or even comment removal.   In 
+addition,  since  I  have  not  included  a  symbol table, or semantic 
+actions in the grammar  to  maintain  proper  context  (i.e.,  current 
+scope),   typedef  names  and  struct/class/union/enum  tags  are  not 
+*really* defined.  To  allow  users  to  experiment  with  my  grammar 
+without  a  symbol table, my lexer assumes that if the first letter of 
+the name is upper case, then then name is a type name.  This  hack  is 
+far  from  sufficient  for parsing full blown programs, but it is more 
+than sufficient for experimenting with the grammar  to  determine  the 
+acceptability  of  a  token sequence, and to understand how my grammar 
+parsed the sequence.
+
+Since I did not  believe  that  a  lexical  analyzer  alone  would  be 
+sufficient  to assist many people with playing with my grammar, I have 
+also provided the basis for a tool to explain what a grammar is doing. 
+Specifically, I have modified a file that is included in the  Berkeley 
+YACC  distribution  so  that  parsers  generated  by such a YACC would 
+automatically display a syntax tree in graphical-ASCII format during a 
+parse.  The instructions for using and building  this  yacc  tool  are 
+presented  in  the  next  section.  Note that there are no significant 
+special hooks in my grammar or parser to excite this  yacc  tool,  and 
+the  tool can be used equally well on any grammar that you are working 
+with.  This graphical debugging tool  is  probably  one  of  the  most 
+popular  aspects  of  my  releases, and its presence and usefulness to 
+grammar developers should not be underestimated.
+
+Significantly new to this  release  is  a  large  file  that  contains 
+machine  generated  documentation (re: Y.OUTPUT).  This file goes well 
+beyond what is provided in a typical verbose output, and provides both 
+detailed conflict analysis, and a  number  of  cross-references  which 
+make  it  **MUCH**  easier to read the associated grammar.  I have not 
+yet decided whether  to  market,  shareware,  or  plain  give-away  my 
+program,  so the best I can do at this point is to release the machine 
+generated documentation.  Unfortunately, this file  is  *very*  large, 
+and  I have decided (for the time being) to distribute it only via the 
+ftp sites only.  I am  doing  this  to  lessen  the  global  bandwidth 
+utilization  during my grammar posting to the network.  I will however 
+post the file (AUTODOC5.TXT)  which  documents  the  contents  of  the 
+Y.OUTPUT  file,  so that users can decide if they want to download the 
+larger  file.   To  hint  at  what  is  included  in   the   automatic 
+documentation, the following are the sections:
+
+	Reference Grammar
+	Alphabetized Grammar
+	Sample Expansions for the Non-terminal Tokens
+	Summary Descriptions of the Terminal Tokens
+	Symbol and Grammar Cross Reference for the Tokens
+	Sample Stack Context and Accessing Sentences for each State
+	Concise list of Conflicts
+	Canonical Description of Conflicts
+	Verbose listing of state transitions
+	Explanations for all reductions suggested in conflicts
+
+Please see AUTODOC5.TXT for more details.
+
+I  have  posted  7  of  the  8 files to comp.lang.c++ (I will not post 
+Y.OUTPUT due to its size), to make this information  as  available  as 
+possible  to users and developers.  I will also post this introductory 
+note to comp.compilers, and comp.lang.c.  I am arranging for  archival 
+support  via  several  ftp  sites, and updates will be posted to those 
+sites.  I will also try to get the source to Berkeley YACC  posted  to 
+these  ftp  sites,  although it is certainly available at more central 
+sites.
+
+Currently, Doug Lea and  Doug  Schmidtt  have  graciously  offered  to 
+provide  anonymous  ftp  sites  for  all  8  of  files, as well as the 
+Berkeley YACC source (if you need it).  The ftp addresses are:
+
+ics.uci.edu (128.195.1.1) in the ftp/pub directory as:
+
+	c++grammar2.0.tar.Z 
+	byacc1.8.tar.Z
+
+mach1.npac.syr.edu (128.230.7.14) in the ftp/pub/C++ directory as:
+
+	c++grammar2.0.tar.Z
+	byacc1.8.tar.z
+
+
+
+HOW TO EXPERIMENT WITH THE C++ GRAMMAR
+
+The following describes how to use the graphical debugging  extensions 
+to Berkeley YACC to explore the grammar.
+
+Note that the following instructions assume that you have the Berkeley 
+YACC  source  on  hand.   You can actually use any YACC to process the 
+grammar, but  running  the  resulting  demo  (which  has  no  semantic 
+actions)  will  tend to be quite boring.  If you can't get hold of the 
+Berkeley YACC, you should  at  least  try  to  enable  the  "debugging 
+options"  in  your  parser  to  so  that  you can see in some way what 
+reductions are taking place.  (Hint: search for the letters "debug" in 
+the C file that your yacc produces...).
+
+        1) Get the entire source for Berkeley YACC 1.8 1/2/91
+        2) Verify that you can make the YACC
+        3) Rename SKELETON.C to SKELOLD.C, and implant my SKELGRPH.C
+                in that directory as SKELETON.C
+        4) Make the yacc using this new SKELETON.C
+        5) Using the above yacc, process my CPP5.Y file
+                yacc -dvl cpp5.y
+           The result should be a file y.tab.c, and y.tab.h
+        6) Using Flex (replacement for lex) to process my CPP5.L file
+                flex cpp5.l
+           the result should be yy.lex.c
+        7) Compile the two files
+                cc -o cpp5  y.tab.c yy.lex.c
+           the result should be an executable called cpp5
+        8) Set the environment variable YYDEBUG to 6
+                setenv YYDEBUG 6
+           If you don't do this, the graphical output will not appear!
+        9) Run the program cpp5
+                cpp5
+        10) Try the input:
+                int a;
+        11) You should see a nice parse tree.  Enjoy.  Note that
+            the lexer DOES NOT INCLUDE A SYMBOL TABLE, and does
+            NOT KEEP TRACK OF CURRENT SCOPES.  The hack (see the
+            CPP5.L file for details) is to assume that any identifier
+            that begins with a capital letter is a typedef name
+            Send complaints about code that doesn't parse "correctly".
+
+
+
+
+HISTORICAL NOTES
+
+
+Developing the C grammar (that is intended to be compatible  with  the 
+ANSI  C standard) was relatively straight forward (compared to the C++ 
+grammar).  The one difficulty in this process was the desire to  avoid 
+use  of  %prec  and  %assoc  constructs  in  YACC, which would tend to 
+obscure ambiguities.  Since I didn't know what ambiguities were  lying 
+in  wait  in  C++,  obscuring  ambiguities  was unacceptable.  It took 
+several weeks to remove the conflicts that typically appear,  and  the 
+tedious  process  exposed  several  ambiguities that are not currently 
+disambiguated by the ANSI standard.  The quality of the C  grammar  is 
+(IMHO)  dramatically  higher  than what has been made available within 
+the  public  domain.   Specifically,  a   C   grammar's   support   of 
+redefinition  of typedef names within inner scopes (the most difficult 
+area of the grammar) is typically excluded from public domain grammar, 
+and even excluded from most grammars that  are  supplied  commercially 
+with  parser  generators!   I  expect  that  this grammar will be very 
+useful in the development of C related tools.
+
+The development of the C++ grammar (initially compatible with  version 
+1.2,  but  enhanced to support version 2.0 specifications as they were 
+made available) was anything but straight  forward.   The  requirement 
+that  I  set  to NOT USE %prec and %assoc proved both a blessing and a 
+curse.  The blessing was that I could see what the  problems  were  in 
+the  language, the curse was that there were A LOT of conflicts (I can 
+recall  times  during  the  development  effort  when  the  number  of 
+conflicts  was  well  in  excess of 200).  The most recent addition of 
+nested types probably took about 2 weeks to implement.  On  the  other 
+hand,  I  probably  spent  several  months  developing  the  automated 
+documentation tools that allowed me to  debug  the  grammar  additions 
+this quickly. 
+
+Towards  the  end of the initial development of the C++ grammar, which 
+took roughly 3 months of my time (circa summer 1989), I began  to  see 
+the  folly in part of my quest.  I came to the conclusion that further 
+attempts  to  modify  my  grammar,  so  as  to  defer  resolutions  of 
+ambiguities,  would  lead  to an unreadable language. Specifically, my 
+feeling was that I was  entering  into  a  battle  of  wits  with  the 
+compiler,  and  the compiler was starting to win.  It was beginning to 
+be the case that the parser COULD  figure  out  what  I  said,  but  I 
+couldn't.  Indeed, even examples in a version of the C++ 2.0 reference 
+manual (and published in the ARM) demonstrated this problem (my parser 
+could  parse  some  examples  that  neither  I  nor the authors parsed 
+correctly!).  At this point I decided to  stop  my  quest  to  FURTHER 
+defer  resolutions  of  ambiguities, and let the grammar commit in one 
+direction (always in favor of declarations), at the late point that is 
+provided by my grammar.  If this direction proved "incorrect in  light 
+of  the  context  that  followed", then I generated a syntax error.  I 
+believe this strategy provides  ample  room  for  expressiveness.   In 
+support  of  this expressiveness, I have (based on my discussions with 
+language  experts)  deferred  disambiguation  far  longer  than  other 
+attempts  at  producing an LR(1) grammar.  I would strongly argue that 
+any code that my grammar identifies as having a "syntax error"  (based 
+on  "premature"  disambiguation), but cfront allows, should ABSOLUTELY 
+be rewritten in a less ambiguous (and hence more portable) form.
+
+It should be noted that my grammar cannot  be  in  constant  agreement 
+with   such  implementations  as  cfront  because  a)  my  grammar  is 
+internally consistent (mostly courtesy of its formal nature  and  YACC 
+verification),  and b) YACC generated parsers don't dump core. (I will 
+probably take a lot of flack for that last snipe, but.... every time I 
+have had difficulty figuring what  was  meant  syntactically  by  some 
+construct that the ARM was vague about, and I fed it to cfront, cfront 
+dumped core.)
+
+One major motivation for using the C++ grammar that I have provided is 
+that it is capable of supporting old style function definitions (e.g.: 
+main(argc,  argv)  int  argc;  char*argv[];  {...}  ).  I believe this 
+capability was removed from the C++ specification in order  to  reduce 
+ambiguities  in  a  specific  implementation  (cfront).  As my grammar 
+demonstrates, this action was  not  necessary.  Supporting  old  style 
+function  definition  GREATLY  eases  the transition to the use of C++ 
+from traditional C.  I expect that as some parsers  begin  to  support 
+this  option,  that  other  parsing  engines  will  be  forced in this 
+direction by a competitive marketplace.  Using  my  grammar,  and  the 
+standards it implies, appears to be a very straightforward approach to 
+this support.
+
+A  second  motivation for using my grammar is that it can be processed 
+by YACC.  The advantage in this fact lies with  YACC's  capability  to 
+identify  ambiguities.   For  software  manufacturers that are heavily 
+concerned with correctness,  this  is  an  INCREDIBLE  advantage.   My 
+experience  with  hand  written  parsers  (which  usually  represent a 
+translation by a fallible human from a grammar  to  parsing  code)  is 
+that  they  evolve and become more correct with time.  Ambiguous cases 
+are often misparsed, without the author ever  realizing  there  was  a 
+conflict!   In  contrast,  either  a  YACC  grammar  supports  a given 
+construct, or it doesn't.  If a YACC grammar supports a construct, the 
+semantic interpretation  is  usually  rather  straight  forward.   The 
+likelihood of internal errors in the parser is therefore SIGNIFICANTLY 
+reduced.  The  fact the the grammars I supplied are free of %assoc and 
+%prec operators, implies the grammar  are  fairly  portable,  and  the 
+conflicts are open to peer code review (and not obscured).
+
+Most  recently  I have joined the ANSI C++ committee (X3J16), and have 
+tried to follow their progress with hopes of maintaining compliance in 
+my grammar.  Unfortunately, political pressures within X3J16 appear to 
+make it IMHO more desirable to quickly approve a standard that matches 
+cfront's performance (when it is not dumping core), than to provide  a 
+clean,  consistent  and formal syntax as part of the standard.  Rather 
+than fixing inconsistent hackery within the syntax, there  is  IMHO  a 
+tendency   to  want  to  "hack  further"  to  match  cfront's  current 
+performance (or the ARM's prophesy).   As  an  example  of  this,  the 
+fundamental  hack  in  all of C is the feedback from the parser to the 
+lexer to identify typedefnames.  There is discussion afoot to (for  no 
+reason  other than compliance with a *proposed* cfront feature) extend 
+this another notch and require feedback to distinguish template names. 
+This hackery was not required by the syntax, rather it was "desirable" 
+to match the performance of beta-cfront (and the  ARM).   When  cfront 
+changes,  and  old  code is obsoleted, the arguments abound that it is 
+for the good of humanity.  When cfront is hacking inconsistently, then 
+no change can be made, because of the thousands of lines of code  that 
+depend  on this psuedo-standard.  Perhaps my grammar will help in some 
+small  way  Microsoft,  Zortech,  Borland,   and   dozens   of   other 
+entrepreneurs  work toward building a standard for a language that has 
+enough consistency to grow and flourish (note that none of  the  above 
+vendors  use  my grammar in their products, but I think they would all 
+share my desire for a cleaner syntax).  If I  am  successful  with  my 
+grammar,  then  I  will be able to write C++ tools in a consistent and 
+open marketplace.  From my perspective, the outcome is not clear.   If 
+you have a channel to support the use of a cleaner syntax in the X3J16 
+standard, I would heartily invite you to exercise that channel.
+
+As  it  currently  stands,  my  grammar  teeters  on the edge of being 
+unusable due to its size.  The size in turn is due to the  variety  of 
+special cases that must be dealt with within C++ parsing.  With only a 
+few more inconsistent additions to the "standard language", my grammar 
+will surely become completely unusable.  I am trying to develop a yacc 
+preprocessor  that will allow me to rein back in the complexity of the 
+grammar.  If I can do this, then it will continue to  be  possible  to 
+update  my  grammar  to  match  the emerging ANSI Standard. I can only 
+promise to try.
+
+
+FEEDBACK ABOUT THE GRAMMARS
+
+If you find any errors in my grammars, I would be  DELIGHTED  to  hear 
+mention  of  them!!!!   These  should  fall  into one of the following 
+categories:
+
+        1) The grammar left out the following features of C++...
+        or
+        2) The grammar mis-parses the following sequences...
+        or
+        3) The discussion of the following ambiguity is
+        incorrect...
+        4) The grammar could be simplified as follows...
+
+Please send  correspondence  of  this  form  to  jar@hq.ileaf.com.  My 
+response  to  1's  will be to add the feature (if possible!); feel sad 
+that I made a mistake; and feel glad that YOU found it.  I will have a 
+similar response to 2's.  Responses of type 3 are GREAT, but I haven't 
+found many folks that really get into YACC ambiguities, so I have  low 
+expectations...  feel free to surprise me!!! :-) :-).  Items of type 3 
+are interesting, but since simplicity is in the eye of  the  beholder, 
+such  suggestions  are  subject  to  debate.  I would be interested in 
+seeing suggestions in this area with the constraint that they  do  not 
+increase  the  number of conflicts in the grammar!  Please use YACC to 
+check your suggestions before submitting them. (It  is  often  AMAZING 
+how  the  slightest  change  in  the  grammar can change the number of 
+conflicts, and it took a great deal  of  work  to  reach  the  current 
+state).  Distribution site(s) will be set up to distribute updates and 
+or corrections.  Postings about the presence of  corrections  will  be 
+made on the net.
+
+Since  the  two  grammars  (C and C++) were generated in parallel, you 
+should be able to compare non-terminals directly.  This will hopefully 
+make it easier to identify the  complexities  involved  with  the  C++ 
+grammar, and "ignore" those that result from standard ANSI C.  In both 
+cases  I  have  left the standard if-if-else ambiguity intact.  In the 
+case of ANSI C grammar, this is the only shift-reduce conflict in  the 
+grammar.  Although there are a number of conflicts in the C++ grammar, 
+there  are  actually  very  few  classes  of  problems.  In  order  to 
+disambiguate the C++ grammar enough that YACC can figure out  what  to 
+do,  I  was  commonly forced to "inline expand" non-terminals found in 
+the C grammar.  This expansion allowed YACC  to  defer  disambiguation 
+until  it  was possible for an LR(1) parser to understand the context. 
+The unfortunate consequence of this inline expansion is a large growth 
+in the number of rules, and the presence of an effective  "multiplier" 
+in  most  cases  where  conflicts do occur. As a result, any conflicts 
+that arise are multiplied by a factor corresponding to the  number  of 
+rules  I  had  to  list  separately.   I  have grouped the C++ grammar 
+conflicts in the "Status" section of the GRAMMAR5.TXT paper,  but  you 
+are welcome to explore my grammars using YACC directly (be warned that 
+you  will  need  a  robust  version  of  YACC  to handle the C++ sized 
+grammar).  PLEASE do not be put off by the number of conflicts in  the 
+C++  grammar.  There are VERY FEW CONFLICTS, but my elaborated grammar 
+confuses the count.
+
+The GRAMMAR5.TXT paper is FAR from a publishable quality paper, but it 
+discusses many of the issues involved in ambiguities  in  my  grammar, 
+and  more  generally  in the C++ language. I hope GRAMMAR5.TXT it is a 
+vast improvement over "nothing at all", but apologize in  advance  for 
+lack of polished structure, and the presence of many typos (which must 
+surely be present).  I hope you find this almost-paper interesting. My 
+attempts   at  documenting  conflicts  have  certainly  clarified  the 
+problems in my mind. Based on my experience with the conflicts I  have 
+identified,  most  current  compilers  and translator fall prey to the 
+situations that I have uncovered.  I hope that other  compilers,  that 
+do  not  make  use of the grammar I have made available, will at least 
+seek to standardize the resolution of the problems identified.
+
+
+The AUTODOC5.TXT file provides interesting reading  for  both  readers 
+interested  in  LR  and  LALR  parsing (and the subtle connections and 
+distinctions between them), as well as any user that wishes  to  fully 
+comprehend  the  contents  of  the  Y.OUTPUT  file.   It  includes  an 
+extensive  discussion  of  ambiguities,  how  they  are  removed,  how 
+LALR-only ambiguities arise, and how they can be dealt with.
+
+With  this  release  of the grammar I have begun to distribute machine 
+generated documentation for my grammar.  As a result, if  my  analysis 
+of  conflicts  are  questionable,  the  supporting data is immediately 
+present to confirm or deny my analysis.  If you wish to correct any of 
+my analysis, please use and refer to the Y.OUTPUT  file  that  I  have 
+provided. 
+
+As  a  small  commercial message... I am a freelance consultant, and I 
+travel far and wide to perform contracts.  If you like the work that I 
+am presenting in this group of documents, and  would  like  to  see  a 
+resume or at least talk, please feel free to contact me.
+
+I  hope  that  the  grammars  that  I have provided, will lead to many 
+successful C++ processing projects.
+
+Jim Roskind 
+Independent Consultant 
+516 Latania Palm Drive  
+Indialantic FL 32903 
+(407)729-4348 
+jar@hq.ileaf.com or ...!uunet!leafusa!jar
